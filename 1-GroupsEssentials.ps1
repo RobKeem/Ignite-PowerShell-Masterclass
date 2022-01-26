@@ -4,10 +4,10 @@
 #---------------------------------------------------------------------------------------
 
 # Get all groups or a specific group
-Get-UnifiedGroup | ? {$_.DisplayName -eq 'Ignite'}
+Get-UnifiedGroup | Where-Object {$_.DisplayName -eq 'Ignite'}
 
 # List all groups in descending order
-Get-UnifiedGroup | Select Id, DisplayName, ManagedBy, Alias, AccessType, `
+Get-UnifiedGroup | Select-Object Id, DisplayName, ManagedBy, Alias, AccessType, `
     WhenCreated, @{Expression={([array](Get-UnifiedGroupLinks -Identity $_.Id -LinkType `
     Members)).Count }; Label='Members'} `
     | Sort-Object whencreated `
